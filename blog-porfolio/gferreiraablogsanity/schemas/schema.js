@@ -13,6 +13,23 @@ export default createSchema({
   types: schemaTypes.concat([
     /* Your types here! */
     {
+      name: "author",
+      type: "document",
+      title: "Author",
+      fields: [
+        {
+          name: "name",
+          type: "string",
+          title: "Name",
+        },
+        {
+          name: "avatar",
+          title: "Avatar",
+          type: "image",
+        },
+      ],
+    },
+    {
       name: "blog",
       type: "document",
       title: "Blog",
@@ -21,6 +38,9 @@ export default createSchema({
           name: "title",
           type: "string",
           title: "Title",
+          validation: (Rule) => {
+            return Rule.required().min(5).max(30);
+          },
         },
         {
           name: "subtitle",
@@ -28,9 +48,34 @@ export default createSchema({
           title: "Subtitle",
         },
         {
+          name: "coverImage",
+          type: "image",
+          title: "Cover Image",
+        },
+        {
+          name: "date",
+          type: "datetime",
+          title: "Date",
+          validation: (Rule) => {
+            return Rule.required();
+          },
+        },
+        {
+          name: "author",
+          type: "reference",
+          title: "Author",
+          to: [{ type: "author" }],
+          validation: (Rule) => {
+            return Rule.required();
+          },
+        },
+        {
           name: "slug",
           type: "slug",
           title: "Slug",
+          validation: (Rule) => {
+            return Rule.required();
+          },
         },
       ],
     },
