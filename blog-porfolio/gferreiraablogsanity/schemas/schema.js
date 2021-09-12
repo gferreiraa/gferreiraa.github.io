@@ -51,8 +51,56 @@ export default createSchema({
           name: "coverImage",
           type: "image",
           title: "Cover Image",
+          fields: [
+            {
+              type: "text",
+              name: "alt",
+              title: "Description",
+            },
+          ],
           validation: (Rule) => {
-            return Rule.required().min(5).max(30);
+            return Rule.required();
+          },
+        },
+        {
+          name: "content",
+          type: "array",
+          of: [
+            {
+              type: "block",
+            },
+            {
+              type: "image",
+              fields: [
+                {
+                  type: "text",
+                  name: "alt",
+                  title: "Description",
+                  options: {
+                    list: [
+                      { title: "Center", value: "center" },
+                      { title: "Left", value: "left" },
+                      { title: "Right", value: "right" },
+                    ],
+                    layout: "radio",
+                    isHighlighted: true,
+                  },
+                },
+              ],
+              options: {
+                hotspot: true,
+              },
+            },
+            {
+              type: "code",
+              options: {
+                withFilename: true,
+              },
+            },
+          ],
+          title: "Content",
+          validation: (Rule) => {
+            return Rule.required();
           },
         },
         {
