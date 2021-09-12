@@ -51,6 +51,9 @@ export default createSchema({
           name: "coverImage",
           type: "image",
           title: "Cover Image",
+          validation: (Rule) => {
+            return Rule.required().min(5).max(30);
+          },
         },
         {
           name: "date",

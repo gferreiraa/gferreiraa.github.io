@@ -24,6 +24,10 @@ export default function Home({ blogs }) {
               date={blog.date}
               image={blog.coverImage}
               author={blog.author}
+              link={{
+                href: "/blogs/[slug]",
+                as: `/blogs/${blog.slug}`,
+              }}
             />
           </Col>
         ))}
